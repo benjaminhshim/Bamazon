@@ -38,9 +38,9 @@ function buyItem() {
     connection.query('SELECT * FROM products', function (err, res) {
         if (err) throw err;
     
-        console.log('\nFOR SALE\n');
+        console.log('\n' + clc.cyan('FOR SALE') + '\n');
         res.forEach(i => {
-            console.log('Item ID: ' + i.item_id + '\nItem: ' + i.product_name.toUpperCase() + '\nPrice: $' + i.price + '\n');
+            console.log(clc.green('Item ID:') + ' ' + i.item_id + clc.green('\nItem:') + ' ' + i.product_name.toUpperCase() + clc.green('\nPrice:') + ' $' + i.price + '\n');
         });
     
         inquirer.prompt([
@@ -70,13 +70,15 @@ function buyItem() {
                 // console.log(newQuantity);
     
                 productSales = answers.quantity * customerItem.price;
-                console.log('\nYou spent $' + productSales);
+                console.log('\nYou spent $' + clc.yellow(productSales));
     
                 updateSales();
     
                 updateTransaction();
             } else {
-                console.log('we are out of stock');
+                console.log(clc.red('Insufficient quantity!'));
+
+                start();
             }
     
         })
@@ -98,7 +100,7 @@ function updateTransaction() {
         ],
         function (err, res) {
             if (err) throw err;
-            console.log('\nQuantity Updated: ' + newQuantity);
+            console.log('\nQuantity Updated: ' + clc.blue(newQuantity));
         }
     )
 }
@@ -127,7 +129,7 @@ function updateSales() {
                     }
                 ], function (err, res) {
                     if (err) throw (err);
-                    console.log('\nTotal ' + customerItemDept.toUpperCase() + ' Sales: $' + totalSales + '\n');
+                    console.log('\nTotal ' + clc.red(customerItemDept.toUpperCase()) + ' Sales: ' + clc.cyan('$' + totalSales) + '\n');
 
                     start();
 

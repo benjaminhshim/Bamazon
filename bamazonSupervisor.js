@@ -30,6 +30,8 @@ function supervise() {
     ]).then(answers => {
         if (answers.supervise == 'View Product Sales by Department') {
             viewSales();
+        } else {
+            addDept();
         }
     })
 }
@@ -43,7 +45,7 @@ function viewSales() {
 
         var table = new Table({
             head: ["department_id", "department_name", "over_head_costs", "product_sales", "total_profit"],
-           colWidths: [20, 20, 20, 20,20]
+           colWidths: [20, 20, 20, 20, 20]
         });
 
         res.forEach(i => {
@@ -53,10 +55,44 @@ function viewSales() {
             table.push(
                 [i.department_id, i.department_name, i.over_head_costs, parseInt(i.product_sales), parseInt(totalProfit)],
             );
+
         })
 
         console.log(table.toString());
-        
-
+        supervise();
     })
+}
+
+function addDept() {
+
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'newDeptName',
+            message: 'What department do you want to add?'
+        },
+        {
+            type: 'input',
+            name: 'newDeptCosts',
+            message: 'What are the over head costs for this department?'
+        },
+    ]).then(answers => {
+
+        connection.query('INSERT INTO departments SET ?',
+            {
+                department_name: answers.newDeptName,
+                over_head_costs: answers.newDeptCosts
+            },
+            function (err, res) {
+                if (err) throw err;
+                
+                console.log('\n===============================\n')
+                console.log('New Department Added: ' + answers.newDeptName);
+                console.log('Over Head Costs: $' + answers.newDeptCosts);
+                console.log('\n===============================\n')
+                supervise();
+            }
+        )
+    })
+
 }

@@ -10,47 +10,11 @@ var connection = mysql.createConnection({
     database: "bamazon"
 });
 
-
-
-// connection.query('SELECT * FROM products', function (err, res) {
-//     if (err) throw err;
-
-//     inquirer.prompt([
-//         {
-//             type: 'list',
-//             name: 'manageProducts',
-//             message: 'What would you like to do?',
-//             choices: ['View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add New Product']
-//         }
-//     ]).then(answers => {
-        
-//         if (answers.manageProducts === 'View Products for Sale') {
-//             console.log('\nALL AVAILABLE ITEMS\n=====================\n');
-//             res.forEach(i => {
-//                 console.log('Item ID: ' + i.item_id + '\nItem: ' + i.product_name.toUpperCase() + '\nPrice: $' + i.price + '\nQuantity: ' + i.stock_quantity + '\n=====================\n');
-//             });
-
-
-
-//         } else if (answers.manageProducts === 'View Low Inventory') {
-//             console.log('\nLOW INVENTORY\n');
-
-//             res.forEach(i => {
-//                 if (i.stock_quantity < 5) {
-//                         console.log('Item ID: ' + i.item_id + '\nItem: ' + i.product_name.toUpperCase() + '\nPrice: $' + i.price + '\nQuantity: ' + i.stock_quantity + '\n=====================\n');
-//                 };
-//             });
-
-
-
-//         } else if (answers.manageProducts === 'Add to Inventory') {
-//             addMore();
-//         }
-
-//     })
-// });
-
-
+connection.connect(error => {
+    if (error) throw error;
+    console.log('connect as id ' + connection.threadId + '\n');
+    manager();
+})
 
 function manager() {
     inquirer.prompt([
@@ -82,14 +46,13 @@ function manager() {
     })
 }
 
-manager();
 
 function viewAllItems() {
     connection.query('SELECT * FROM products', function (err, res) {
         if (err) throw err;
-        console.log('\nALL AVAILABLE ITEMS\n=====================\n');
+        console.log('\n' + clc.cyan('ALL AVAILABLE ITEMS') + '\n=====================\n');
         res.forEach(i => {
-            console.log('Item ID: ' + i.item_id + '\nItem: ' + i.product_name.toUpperCase() + '\nPrice: $' + i.price + '\nQuantity: ' + i.stock_quantity + '\n=====================\n');
+            console.log(clc.green('Item ID:') + ' ' + i.item_id + '\n' + clc.green('Item:' ) + ' ' + i.product_name.toUpperCase() + '\n' + clc.green('Price:') + ' $' + i.price + '\n' + clc.green('Quantity:') + ' ' + i.stock_quantity + '\n=====================\n');
         });
 
         manager();
@@ -101,7 +64,7 @@ function viewAllItems() {
 function viewLowInventory() {
     connection.query('SELECT * FROM products', function (err, res) {
         if (err) throw err;
-        console.log('\nLOW INVENTORY\n=====================\n');
+        console.log('\n' + clc.red('LOW INVENTORY') + '\n=====================\n');
 
         res.forEach(i => {
             if (i.stock_quantity < 5) {
@@ -159,8 +122,8 @@ function addMore() {
                     }
                 ], function (err, res) {
                     if (err) throw err;
-                    console.log('\nYou added ' + answers.addQuantity + ' ' + stockItem.product_name + '(s)');
-                    console.log('There are now a total of ' + newStock + '\n');
+                    console.log('\nYou added ' + clc.yellow(answers.addQuantity) + ' ' + stockItem.product_name + '(s)');
+                    console.log('There are now a total of ' + clc.magenta(newStock) + '\n');
 
                     manager();
 
