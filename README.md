@@ -1,7 +1,7 @@
 # Bamazon
 
 # Introduction
-Bamazon is an Amazon-like storefront utilized with Node.js and mySql.
+Bamazon is an Amazon-like storefront created with Node.js and mySQL.
 
 # Setup
 ```npm install``` will install **mysql**, **inquirer**, **nodemon**, **cli-color** and **cli-table**.
