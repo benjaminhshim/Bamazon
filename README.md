@@ -4,9 +4,8 @@
 Bamazon is an Amazon-like storefront utilized with Node.js and mySql.
 
 # Setup
-```
-npm install
-```
+```npm install``` will install **mysql**, **inquirer**, **nodemon**, **cli-color** and **cli-table**
+
 
 # Bamazon
 1. ``` bamazonCustomer.js```
@@ -42,4 +41,20 @@ npm install
 * If the manager selects ```Add New Product```, it allows the manager to add a new product to the store.
 
 
+3. ``` bamazonSupervisor.js ```
 
+* Starts with a menu:
+
+    - View Product Sales by Department
+    - Create New Department
+    - End Session
+
+* If the manager selects ```View Product Sales by Department```, it lists the Department Sales and calculates the total sales from the overhead cost and product sales.
+
+* If the manager selects ```Create New Department```, it allows the manager to create a new department and input current overhead costs and product sales. If there are none, by default it will set at 0.
+
+# Demo Videos
+
+bamazonCustomer (https://youtu.be/b9NfSfZUxCk)
+bamazonManager (https://youtu.be/T9QBDYq3wJg)
+bamazonSupervisor (https://youtu.be/mgIqfylcZkQ)
