@@ -4,54 +4,53 @@
 Bamazon is an Amazon-like storefront utilized with Node.js and mySql.
 
 # Setup
-```npm install``` will install **mysql**, **inquirer**, **nodemon**, **cli-color** and **cli-table**
+```npm install``` will install **mysql**, **inquirer**, **nodemon**, **cli-color** and **cli-table**.
 
 
 # Bamazon
 1. ``` bamazonCustomer.js```
 
-* Prints the products in the store.
+    * Displays the ID, name, department, price and quantity of every available product in the store.
 
-* Prompts customer which product they would like to purchase by ID number.
+    * Prompts customer which product they would like to purchase by ID number.
 
-* Asks for the quantity.
+    * Asks user how many of that product the user would like to purchase.
 
-    - If there is a sufficient amount of the product in stock, it will return the total for that purchase.
-    - However, if there is not enough of the product in stock, it will tell the user that there isn't enough of the product.
-    - If the purchase goes through, it updates the stock quantity to reflect the purchase.
-    - It will also update the product sales in the department table.
+        - If there is a sufficient amount of the product in stock, it will return the total for that purchase.
+        - If there is not enough of the product in stock, it will tell the user that there isn't enough of the product.
+        - Once purchased, the stock quantity will update to reflect the purchase.
+        - Product sales will also update in the 'departments' table.
 
 
 2. ``` bamazonManager.js ```
 
-* Starts with a menu:
+    * Starts with a menu:
 
-    - View Products for Sale
-    - View Low Inventory
-    - Add to Inventory
-    - Add New Product
-    - End Session
+        - View Products for Sale
+        - View Low Inventory
+        - Add to Inventory
+        - Add New Product
+        - End Session
 
-* If the manager selects ```View Products for Sale```, it lists all of the products in the store including all of their details.
+    * ```View Products for Sale``` will display the ID, name, department price and quantity of every available product in the store.
 
-* If the manager selects ```View Low Inventory```, it'll list all the products with less than five items in its StockQuantity column.
+    * ```View Low Inventory``` will display all products with less than five items in stock.
 
-* If the manager selects ```Add to Inventory```, it allows the manager to select a product and add inventory.
+    * ```Add to Inventory``` allows the manager to "add more" of any item currently in the store.
 
-* If the manager selects ```Add New Product```, it allows the manager to add a new product to the store.
+    * ```Add New Product``` allows the manager to add a new product to the store.
 
 
 3. ``` bamazonSupervisor.js ```
 
-* Starts with a menu:
+    * Starts with a menu:
 
-    - View Product Sales by Department
-    - Create New Department
-    - End Session
+        - View Product Sales by Department
+        - Create New Department
 
-* If the manager selects ```View Product Sales by Department```, it lists the Department Sales and calculates the total sales from the overhead cost and product sales.
+    * ```View Product Sales by Department``` displays the sales by each department and calculates the total sales from the overhead cost and product sales.
 
-* If the manager selects ```Create New Department```, it allows the manager to create a new department and input current overhead costs and product sales. If there are none, by default it will set at 0.
+    * ```Create New Department``` allows the supervisor to create a new department and input overhead costs and product sales.
 
 # Demo Videos
 
