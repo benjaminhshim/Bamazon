@@ -56,5 +56,7 @@ Bamazon is an Amazon-like storefront utilized with Node.js and mySql.
 # Demo Videos
 
 bamazonCustomer (https://youtu.be/b9NfSfZUxCk)
+
 bamazonManager (https://youtu.be/T9QBDYq3wJg)
+
 bamazonSupervisor (https://youtu.be/mgIqfylcZkQ)
